@@ -1,0 +1,33 @@
+.custom-input{
+    min-width:70px;
+    height: 52px;
+    line-height: 1.5;
+    padding: 0.875rem 1rem 0.875rem 1rem;
+    border: 1px solid #e5e5e5;
+    border-radius: 0;
+    color: #868e96;
+}
+.form-option-label.small {
+    width: 32px;
+    height: 32px;
+}
+.form-option-color {
+    border-radius: 50%; 
+}
+
+.form-option-size {
+    display: block;
+    position: absolute;
+    top: 43%;
+    left: 50%;
+    width: 0.8rem;
+    height: 0.8rem;
+    margin-top: -0.4rem;
+    margin-left: -0.4rem;
+    background-position: top left;
+    background-size: 1rem 1rem;
+    background-repeat: no-repeat;
+}
+.rounded-circle-size {
+    border-radius:0
+}

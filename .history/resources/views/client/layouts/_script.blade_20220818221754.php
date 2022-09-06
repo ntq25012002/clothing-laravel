@@ -1,0 +1,11 @@
+<script src="{{asset('client/assets/js/jquery.min.js')}}"></script>
+<script src="{{asset('client/assets/js/popper.min.js')}}"></script>
+<script src="{{asset('client/assets/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('client/assets/js/ion.rangeSlider.min.js')}}"></script>
+<script src="{{asset('client/assets/js/slick.js')}}"></script>
+<script src="{{asset('client/assets/js/slider-bg.js')}}"></script>
+<script src="{{asset('client/assets/js/lightbox.js')}}"></script> 
+<script src="{{asset('client/assets/js/smoothproducts.js')}}"></script>
+<script src="{{asset('client/assets/js/snackbar.min.js')}}"></script>
+<script src="{{asset('client/assets/js/jQuery.style.switcher.js')}}"></script>
+<script src="{{asset('client/assets/js/custom.js')}}"></script>

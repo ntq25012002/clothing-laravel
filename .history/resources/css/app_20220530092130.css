@@ -1,0 +1,10 @@
+.btn{
+    padding: 8px 12px ;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+
+}
+.btn-primary {
+    background-color: aqua;
+}

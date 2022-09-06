@@ -1,0 +1,199 @@
+*{padding: 0;margin: 0;box-sizing: inherit;}
+:root{
+    --text-color: #333;
+    --white-color: #fff;
+    --black-color: #343a40;
+    --light-blue: #F4F9FC;
+    --primary-color: #FF324D;
+    --border-color: #dbdbdb;
+
+}
+html{
+    font-size: 62.5%; /*Quy định font chữ của trang 1rem = 10px*/
+    line-height: 1.6rem;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+
+.pt_108{
+    padding-top: 108px
+}
+.mt_108{
+    margin-top: 108px;
+}
+a{
+    text-decoration: none;
+}
+.grid{
+    width: 1140px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.grid__full-with{
+    width: 100%;
+}
+.grid__row{
+    display: flex;
+    flex-wrap: wrap;
+}
+.pull-right{
+    float: right;
+}
+
+.pb_20{
+    padding-bottom: 20px;
+}
+.text-center{
+    text-align: center;
+}
+.bg-primary{
+    background-color: var(--primary-color)
+}
+.bg-light-blue{
+    background-color: var(--light-blue);
+}
+/* ============================Modal===================================== */
+.app{
+    position: relative;
+}
+.modal{
+    position:fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+    z-index: 3;
+    animation: leftIn 0.4s linear;
+}
+.modal.active{
+    display: flex;
+}
+.modal__overlay{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    animation: FadeIn linear 0.2s;
+}
+.modal__body{
+    position: relative;
+    margin: auto;
+    z-index: 3;
+}
+/* box-shadow: none|h-offset v-offset blur spread color |inset|initial|inherit; */
+
+
+/* ==========================Table================================= */
+
+
+.table {
+    width: 100%;
+    margin-bottom: 10rem;
+    color: #687188;
+    font-size: 1.8rem;
+    border-collapse: collapse;
+}
+.table-bordered {
+    border: 1px solid #dee2e6;
+}
+.table td{
+    padding: 12px 10px;
+    vertical-align: top;
+}
+.table td{
+    border: 1px solid #dee2e6;
+}
+
+/*=========================Button=================================*/
+.btn{
+    border: 1px solid var(--primary-color);
+    padding: 12px 28px;
+    color: var(--white-color);
+    transition: all 0.25s ease-in-out;
+    outline: none;
+}
+.btn.btn--primary{
+    background-color: var(--primary-color);
+    color: var(--white-color);
+}
+.btn:hover{
+    background-color: transparent;
+    color: var(--primary-color);
+    cursor: pointer;
+}
+
+.btn.btn--size-s{
+    padding: 8px 18px;
+    font-size: 1.4rem;
+}
+
+.btn.btn--disabled{
+    cursor:default;
+    /* filter: brightness(80%); */   /*Giảm độ sáng*/
+    background-color:#c3c3c3;
+    color: #949494;
+} 
+
+
+/*============================keyframe====================================*/
+/* Fading animation */
+@-webkit-keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+}
+  
+@keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+}
+
+
+@keyframes FadeIn{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+@keyframes scale {
+    from {
+        opacity: 0;
+        transform: scale(0)
+    }
+    to{
+        opacity: 1;
+        transform: scale(1)
+    }
+}
+
+@keyframes showDown {
+    from {
+        transform: translateY(-20px);
+    }
+    to{
+        transform: translateY(0);
+    }
+}
+
+@keyframes showUp {
+    from {
+        opacity:0;
+        transform: translateY(25px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes leftIn {
+    from {
+        transform: translateX(-100%);
+    }
+    to{
+        transform: translateY(0);
+    }
+}

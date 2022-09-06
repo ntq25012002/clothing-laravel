@@ -1,0 +1,13 @@
+#img-preview{
+    width: 90%;
+    padding-top: 6px;
+}
+.product-image-detail{
+    margin-right: 16px;
+}
+.btn-delete > i{
+    cursor: pointer;
+}
+.tox-tinymce{
+    min-height: 405px;
+}

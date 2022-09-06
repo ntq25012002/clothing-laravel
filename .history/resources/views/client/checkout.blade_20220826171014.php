@@ -1,0 +1,531 @@
+@extends('client.layouts.main')
+
+@section('css')
+    <style>
+        .top-menu-breadcrubms {
+            margin-top: 67px;
+        }
+       
+    </style>
+@endsection
+
+@section('content')
+<!-- ======================= Top Breadcrubms ======================== -->
+    <div class="gray py-3 top-menu-breadcrubms">
+        <div class="container">
+            <div class="row">
+                <div class="colxl-12 col-lg-12 col-md-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{route('home')}}">Trang chủ</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('shopping-cart')}}">Giỏ hàng</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Thanh toán</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ======================= Top Breadcrubms ======================== -->
+    
+    <!-- ======================= Product Detail ======================== -->
+    <section class="middle">
+        <div class="container">
+        
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                    <div class="text-center d-block mb-5">
+                        <h2>Thông tin thanh toán</h2>
+                    </div>
+                </div>
+                @if (session('err'))
+                    <div class="alert alert-danger">
+                        {{session('err')}}
+                    </div>
+                @endif
+            </div>
+            <form action="" method="post" id="form-checkout">
+                @csrf
+                <div class="row justify-content-between">
+                    <div class="col-12 col-lg-7 col-md-12">
+                        <form action="{{route('post-checkout')}}" method="post" id="form-checkout">
+                            <h5 class="mb-4 ft-medium">Thông tin chi tiết</h5>
+                            <div class="row mb-2">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <div class="form-group">
+                                        <label class="text-dark">Họ tên *</label>
+                                        <input type="text" class="form-control" name="name" value="{{old('name') ?? ''}}" placeholder="Họ tên" />
+                                    </div>
+                                    @error('name')
+                                        <span style="color: tomato">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <div class="form-group">
+                                        <label class="text-dark">Email *</label>
+                                        <input type="email" class="form-control" value="{{old('email') ?? ''}}" name="email" placeholder="Email" />
+                                    </div>
+                                    @error('email')
+                                        <span style="color: tomato">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
+                                </div>
+                                
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <div class="form-group">
+                                        <label class="text-dark">Số điện thoại *</label>
+                                        <input type="text" class="form-control" value="{{old('phone') ?? ''}}" name="phone" placeholder="Số điện thoại" />
+                                    </div>
+                                    @error('phone')
+                                        <span style="color: tomato">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
+                                </div>
+    
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <div class="form-group">
+                                        <label class="text-dark">Địa chỉ *</label>
+                                        <input type="text" class="form-control" value="{{old('address')}}" name="address" placeholder="Địa chỉ nhận hàng" />
+                                    </div>
+                                    @error('address')
+                                        <span style="color: tomato">
+                                            {{ $message }}
+                                        </span>
+                                    @enderror
+                                </div>
+                                
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                    <div class="form-group">
+                                        <label class="text-dark">Ghi chú</label>
+                                        <textarea class="form-control ht-50" name="note" id="note"></textarea>
+                                    </div>
+                                </div>
+                                <input type="text" name="payment" id="payment" hidden>
+                            </div>
+                            
+                            <h5 class="mb-4 ft-medium">Phương thức thanh toán</h5>
+                            <div class="row mb-4">
+                                <div class="col-12 col-lg-12 col-xl-12 col-md-12">
+                                    <div class="panel-group pay_opy980" id="payaccordion">
+                                        <!-- Thanh toán khi nhận hàng -->
+                                        <div class="panel panel-default border">
+                                            <div class="panel-heading" id="pay">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" role="button"  data-payment="0" data-parent="#payaccordion" href="#cod" aria-expanded="true"  aria-controls="payPal" class="payments">
+                                                        Thanh toán khi nhận hàng<img src="{{asset('client/assets/img/paypal.html')}}" class="img-fluid" alt="">
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div id="cod" class="panel-collapse collapse " aria-labelledby="pay" data-parent="#payaccordion"></div>
+                                        </div>
+                                        <!-- Pay By Paypal -->
+                                        <div class="panel panel-default border">
+                                            <div class="panel-heading" id="pay">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" role="button" data-payment="1" data-parent="#payaccordion" href="#payPal" aria-expanded="false"  aria-controls="payPal" class="payments">
+                                                        PayPal<img src="{{asset('client/assets/img/paypal.html')}}" class="img-fluid" alt="">
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div id="payPal" class="panel-collapse collapse " aria-labelledby="2" data-parent="#payaccordion">
+                                                <div class="panel-body">
+                                                    <div class="form-group">
+                                                        <label class="text-dark">PayPal Email</label>
+                                                        <input type="text" class="form-control simple" placeholder="paypal@gmail.com">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <button type="submit" class="btn btn-dark btm-md full-width">Pay 400.00 USD</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Pay By Strip -->
+                                        <div class="panel panel-default border">
+                                            <div class="panel-heading" id="stripes">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" role="button" data-payment="3" data-parent="#payaccordion" href="#stripePay" aria-expanded="false"  aria-controls="stripePay" class="payments">
+                                                        Stripe<img src="{{asset('client/assets/img/strip.html')}}" class="img-fluid" alt="">
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div id="stripePay" class="collapse" aria-labelledby="stripes" data-parent="#payaccordion">
+                                                <div class="panel-body">
+                                                
+                                                    <div class="row">
+                                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label class="text-dark">Card Holder Name *</label>
+                                                                <input type="text" class="form-control" placeholder="Dhananjay Preet" />
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label class="text-dark">Card Number *</label>
+                                                                <input type="text" class="form-control" placeholder="5426 4586 5485 4759" />
+                                                            </div>
+                                                        </div>									
+                                                    
+                                                        <div class="col-lg-5 col-md-5 col-sm-6">
+                                                            <div class="form-group">
+                                                                <label class="text-dark">Expire Month *</label>
+                                                                <select class="custom-select">
+                                                                    <option value="1" selected="">January</option>
+                                                                    <option value="2">February</option>
+                                                                    <option value="3">March</option>
+                                                                    <option value="4">April</option>
+                                                                    <option value="5">May</option>
+                                                                    <option value="6">June</option>
+                                                                    <option value="7">July</option>
+                                                                    <option value="8">August</option>
+                                                                    <option value="9">September</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="col-lg-5 col-md-5 col-sm-6">
+                                                            <div class="form-group">
+                                                                <label class="text-dark">Expire Year *</label>
+                                                                <select class="custom-select">
+                                                                    <option value="1" selected="">2010</option>
+                                                                    <option value="2">2018</option>
+                                                                    <option value="3">2019</option>
+                                                                    <option value="4">2020</option>
+                                                                    <option value="5">2021</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="col-lg-2 col-md-2 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label class="text-dark">CVC *</label>
+                                                                <input type="text" class="form-control" placeholder="CVV*">
+                                                            </div>
+                                                        </div>										
+                                                        
+                                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                                            <div class="form-group">
+                                                                <input id="ak-2" class="checkbox-custom" name="ak-2" type="checkbox">
+                                                                <label for="ak-2" class="checkbox-custom-label">By Continuing, you ar'e agree to conditions</label>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                                            <div class="form-group text-center">
+                                                                <a href="#" class="btn btn-dark full-width">Pay 202.00 USD</a>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Pay By Debit or credtit -->
+                                        <div class="panel panel-default border">
+                                            <div class="panel-heading" id="dabit">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" href="#payaccordion" data-payment="3" data-target="#debitPay" aria-expanded="false"  aria-controls="debitPay" class="payments">
+                                                        Debit Or Credit<img src="{{asset('client/assets/img/debit.html')}}" class="img-fluid" alt="">
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div id="debitPay" class="panel-collapse collapse" aria-labelledby="dabit" data-parent="#payaccordion">
+                                                <div class="panel-body">
+                                                    <div class="row">
+                                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label class="text-dark">Card Holder Name *</label>
+                                                                <input type="text" class="form-control" placeholder="Card Holder Name" />
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label class="text-dark">Card Number *</label>
+                                                                <input type="text" class="form-control" placeholder="7589 6356 8547 9120" />
+                                                            </div>
+                                                        </div>									
+                                                    
+                                                        <div class="col-lg-5 col-md-5 col-sm-6">
+                                                            <div class="form-group">
+                                                                <label class="text-dark">Expire Month *</label>
+                                                                <select class="custom-select">
+                                                                    <option value="1" selected="">January</option>
+                                                                    <option value="2">February</option>
+                                                                    <option value="3">March</option>
+                                                                    <option value="4">April</option>
+                                                                    <option value="5">May</option>
+                                                                    <option value="6">June</option>
+                                                                    <option value="7">July</option>
+                                                                    <option value="8">August</option>
+                                                                    <option value="9">September</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="col-lg-5 col-md-5 col-sm-6">
+                                                            <div class="form-group">
+                                                                <label class="text-dark">Expire Year *</label>
+                                                                <select class="custom-select">
+                                                                    <option value="1" selected="">2010</option>
+                                                                    <option value="2">2018</option>
+                                                                    <option value="3">2019</option>
+                                                                    <option value="4">2020</option>
+                                                                    <option value="5">2021</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="col-lg-2 col-md-2 col-sm-12">
+                                                            <div class="form-group">
+                                                                <label class="text-dark">CVC *</label>
+                                                                <input type="text" class="form-control" placeholder="CVV*" />
+                                                            </div>
+                                                        </div>										
+                                                        
+                                                        <div class="col-lg-6 col-md-6 col-sm-12">
+                                                            <div class="form-group">
+                                                                <input id="al-2" class="checkbox-custom" name="al-2" type="checkbox">
+                                                                <label for="al-2" class="checkbox-custom-label">By Continuing, you ar'e agree to conditions</label>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                                            <div class="form-group text-center">
+                                                                <a href="#" class="btn btn-dark full-width">Pay 202.00 USD</a>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </form>
+                    </div>
+                    
+                    <!-- Sidebar -->
+                    <div class="col-12 col-lg-4 col-md-12">
+                        <div class="d-block mb-3">
+                            {{-- @if (count($totalItemPrd) > 0) --}}
+                                <h5 class="mb-4">Sản phẩm</h5>
+                            {{-- @endif --}}
+                            <ul class="list-group list-group-sm list-group-flush-y list-group-flush-x mb-4">
+                                @if (!empty($cart) && count($cart) >0)
+                                    @foreach ($cart as $item)
+                                        <li class="list-group-item">
+                                            <div class="row align-items-center">
+                                                <div class="col-3">
+                                                    <!-- Image -->
+                                                    <a href="product.html"><img src="{{$item['image']}}" alt="..." class="img-fluid"></a>
+                                                </div>
+                                                <div class="col d-flex align-items-center">
+                                                    <div class="cart_single_caption pl-2">
+                                                        <h4 class="product_title fs-md ft-medium mb-1 lh-1">{{$item['name']}}</h4>
+                                                        <p class="mb-1 lh-1"><span class="text-dark">Kích cỡ: {{$item['size']}}</span></p>
+                                                        <p class="mb-3 lh-1"><span class="text-dark">
+                                                            Màu: 
+                                                            <span style="display: inline-block;background-color:{{$item['color']}};width:14px;height:14px;margin-bottom:-3px"></span>
+                                                        </p>
+                                                        <h4 class="fs-md ft-medium mb-3 lh-1">{{number_format($item['price'])}} đ x {{$item['quantity']}}</h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                @endif
+                            </ul>
+                        </div>
+                        
+                        <div class="card mb-4 gray">
+                            <div class="card-body">
+                            <ul class="list-group list-group-sm list-group-flush-y list-group-flush-x">
+                                <li class="list-group-item d-flex text-dark fs-sm ft-regular">
+                                    <span>Thành tiền</span> <span class="ml-auto text-dark ft-medium">{{number_format($total,'0',',','.')}} đ</span>
+                                </li>
+                                <li class="list-group-item d-flex text-dark fs-sm ft-regular">
+                                    <span>Giảm giá</span> 
+                                    <span class="ml-auto text-dark ft-medium">
+                                        @if (!empty(session()->get('discount')))
+                                        @if (session()->get('discount')['type'] == 1)
+                                            {{session()->get('discount')['value']}} %
+                                        @elseif (session()->get('discount')['type'] == 2)
+                                            {{session()->get('discount')['value']}} đ
+                                        @endif
+                                    @else
+                                        0
+                                    @endif
+                                    </span>
+                                </li>
+                                <li class="list-group-item d-flex text-dark fs-sm ft-regular">
+                                    <span>Tổng tiền</span> 
+                                    <span class="ml-auto text-dark ft-medium">
+                                        @if (!empty(session()->get('discount')))
+                                            @if (session()->get('discount')['type'] == 1)
+                                                {{number_format(session()->get('total') - session()->get('total')*session()->get('discount')['value']/100,'0',',','.')}} đ
+                                            @elseif (session()->get('discount')['type'] == 2)
+                                                {{number_format(session()->get('total') - session()->get('discount')['value'],'0',',','.')}} đ
+                                            @endif
+                                        @else
+                                            {{number_format(session()->get('total'),'0',',','.')}} đ
+                                        @endif
+                                    </span>
+                                </li>
+                                <li class="list-group-item fs-sm text-center">
+                                    {{-- Shipping cost calculated at Checkout * --}}
+                                </li>
+                            </ul>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-block btn-dark mb-3 btn--submit" data-url_post="{{route('post-checkout')}}">Xác nhận đặt hàng</button>
+                    </div>
+                    
+                </div>
+            </form>
+            
+        </div>
+    </section>
+    <!-- ======================= Product Detail End ======================== -->
+    
+    <!-- ============================= Customer Features =============================== -->
+    <section class="px-0 py-3 br-top">
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                    <div class="d-flex align-items-center justify-content-start py-2">
+                        <div class="d_ico">
+                            <i class="fas fa-shopping-basket theme-cl"></i>
+                        </div>
+                        <div class="d_capt">
+                            <h5 class="mb-0">Free Shipping</h5>
+                            <span class="text-muted">Capped at $10 per order</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                    <div class="d-flex align-items-center justify-content-start py-2">
+                        <div class="d_ico">
+                            <i class="far fa-credit-card theme-cl"></i>
+                        </div>
+                        <div class="d_capt">
+                            <h5 class="mb-0">Thanh toán</h5>
+                            <span class="text-muted">Up to 6 months installments</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                    <div class="d-flex align-items-center justify-content-start py-2">
+                        <div class="d_ico">
+                            <i class="fas fa-shield-alt theme-cl"></i>
+                        </div>
+                        <div class="d_capt">
+                            <h5 class="mb-0">15-Days Returns</h5>
+                            <span class="text-muted">Shop with fully confidence</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                    <div class="d-flex align-items-center justify-content-start py-2">
+                        <div class="d_ico">
+                            <i class="fas fa-headphones-alt theme-cl"></i>
+                        </div>
+                        <div class="d_capt">
+                            <h5 class="mb-0">24x7 Fully Support</h5>
+                            <span class="text-muted">Get friendly support</span>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    <!-- ======================= Customer Features ======================== -->
+    
+@endsection
+
+
+@section('scripts')
+    <script>
+        function openCart() {
+            
+        }
+        $(document).ready(function() {
+            $(document).on('click','#btn_cart',function(e){
+                const url = $(this).data('url');
+                window.location = url
+            })
+
+            let payments = $('.payments')
+            $(document).on('click','.btn--submit',function(e){
+                e.preventDefault();
+                const urlPost = $(this).data('url_post');
+                const token = $('meta[name="_token"]').attr('content');
+
+                let paymentItem = [];
+                var paymentItemChecked;
+                for (let i = 0;i < payments.length; i++) {
+                    let item = payments[i];
+                    if(item.ariaExpanded == 'false') {
+                        paymentItem.push(item);
+                    }else{
+                        paymentItemChecked = item;
+                    }
+                }
+                if(paymentItem.length == payments.length) {
+                    showWarningToast({
+                        title: 'Phương thức thanh toán',
+                        message: 'Bạn chưa chọn phương thức thanh toán !',
+                        type: 'warning',
+                        duration: 2500,
+                    });   
+                }else{
+                    let payment = paymentItemChecked.getAttribute('data-payment');
+                    console.log($('#payment').val(payment));
+                    document.getElementById('form-checkout').submit();
+                    let name = $('input[name="name"]').val()
+                    let email = $('input[name="email"]').val()
+                    let phone = $('input[name="phone"]').val()
+                    let address = $('input[name="address"]').val()
+                    let note = $('#note').val()
+                    // console.log(note);
+                    // console.log(payment,address,phone,email,name);
+                    $.ajax({
+                        type: 'POST',
+                        url: urlPost,
+                        data: {
+                            name: name,
+                            email: email,
+                            phone: phone,
+                            address: address,
+                            note: note,
+                            _token: token,
+                        },
+                        dataType: 'json',
+                        success: function (response) {
+                            
+                        }
+                    })
+                }
+            })
+            
+            // $(document).on('click','')
+        })
+
+            
+    </script>
+@endsection
