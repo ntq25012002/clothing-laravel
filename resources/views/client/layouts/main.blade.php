@@ -1,38 +1,38 @@
 <!DOCTYPE html>
 <html lang="zxx">
-	
+
 <!-- Mirrored from themezhub.net/kumo-demo-2/kumo/home-8.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 18 Aug 2022 02:01:12 GMT -->
 <head>
 		<meta charset="utf-8" />
 		<meta name="author" content="Themezhub" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="_token" content="{{csrf_token()}}" />
-		
+
         <title>Kumo - Cửa hàng thời trang</title>
-		 
+
         <!-- Custom CSS -->
         @include('client.layouts._style')
 		@yield('css')
     </head>
-	
+
     <body>
-	
+
 		 <!-- ============================================================== -->
         <!-- Preloader - style you can find in spinners.css -->
         <!-- ============================================================== -->
        <div class="preloader"></div>
-		
+
         <!-- ============================================================== -->
         <!-- Main wrapper - style you can find in pages.scss -->
         <!-- ============================================================== -->
         <div id="main-wrapper">
-		
+
             <!-- ============================================================== -->
             <!-- Top header  -->
             <!-- ============================================================== -->
             <!-- Start Navigation -->
 			@include('client.layouts._header')
-			
+
 			<!-- End Navigation -->
 			<div class="clearfix"></div>
 			<!-- ============================================================== -->
@@ -41,27 +41,27 @@
 			<!-- ============================ Hero Banner  Start================================== -->
 			@yield('home-slider')
 			<!-- ============================ Hero Banner End ================================== -->
-			
+
 			<!-- ======================= Product List ======================== -->
 			@yield('content')
 			<!-- ======================= Product List ======================== -->
-			
+
 			<!-- ======================= Customer Review ======================== -->
-			
+
 			<!-- ======================= Customer Review ======================== -->
-			
+
 			<!-- ======================= Blog Start ============================ -->
-			
+
 			<!-- ======================= Blog Start ============================ -->
-			
+
 			<!-- ======================= Instagram Start ============================ -->
-			
+
 			<!-- ======================= Instagram Start ============================ -->
-			
+
 			<!-- ============================ Footer Start ================================== -->
 			@include('client.layouts._footer')
 			<!-- ============================ Footer End ================================== -->
-			
+
 
 			<!-- Product View Modal -->
 			<div class="modal fade lg-modal" id="quickview" tabindex="-1" role="dialog" aria-labelledby="quickviewmodal" aria-hidden="true">
@@ -72,10 +72,10 @@
 							  <span class="ti-close"></span>
 							</button>
 						</div>
-					
+
 						<div class="modal-body">
 							<div class="quick_view_wrap">
-					
+
 								<div class="quick_view_thmb">
 									<div class="quick_view_slide">
 										<div class="single_view_slide"><img src="{{asset('client/assets/img/product/1.jpg')}}" class="img-fluid" alt="" /></div>
@@ -84,10 +84,10 @@
 										<div class="single_view_slide"><img src="{{asset('client/assets/img/product/4.jpg')}}" class="img-fluid" alt="" /></div>
 									</div>
 								</div>
-								
+
 								<div class="quick_view_capt">
 									<div class="prd_details">
-										
+
 										<div class="prt_01 mb-1"><span class="text-light bg-info rounded px-2 py-1">Dresses</span></div>
 										<div class="prt_02 mb-2">
 											<h2 class="ft-bold mb-1">Women Striped Shirt Dress</h2>
@@ -103,11 +103,11 @@
 												<div class="elis_rty"><span class="ft-medium text-muted line-through fs-md mr-2">$199</span><span class="ft-bold theme-cl fs-lg mr-2">$110</span><span class="ft-regular text-danger bg-light-danger py-1 px-2 fs-sm">Out of Stock</span></div>
 											</div>
 										</div>
-										
+
 										<div class="prt_03 mb-3">
 											<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores.</p>
 										</div>
-										
+
 										<div class="prt_04 mb-2">
 											<p class="d-flex align-items-center mb-0 text-dark ft-medium">Color:</p>
 											<div class="text-left">
@@ -137,7 +137,7 @@
 												</div>
 											</div>
 										</div>
-										
+
 										<div class="prt_04 mb-4">
 											<p class="d-flex align-items-center mb-0 text-dark ft-medium">Size:</p>
 											<div class="text-left pb-0 pt-2">
@@ -171,7 +171,7 @@
 												</div>
 											</div>
 										</div>
-										
+
 										<div class="prt_05 mb-4">
 											<div class="form-row mb-7">
 												<div class="col-12 col-lg-auto">
@@ -187,7 +187,7 @@
 												<div class="col-12 col-lg">
 													<!-- Submit -->
 													<button type="submit" class="btn btn-block custom-height bg-dark mb-2">
-														<i class="lni lni-shopping-basket mr-2"></i>Add to Cart 
+														<i class="lni lni-shopping-basket mr-2"></i>Add to Cart
 													</button>
 												</div>
 												<div class="col-12 col-lg-auto">
@@ -198,7 +198,7 @@
 												</div>
 										  </div>
 										</div>
-										
+
 										<div class="prt_06">
 											<p class="mb-0 d-flex align-items-center">
 											  <span class="mr-4">Share:</span>
@@ -213,7 +213,7 @@
 											  </a>
 											</p>
 										</div>
-										
+
 									</div>
 								</div>
 							</div>
@@ -222,66 +222,22 @@
 				</div>
 			</div>
 			<!-- End Modal -->
-			
+
 			{{-- Toast --}}
 			<div>
 				<div id="toast">
-					
+
 				</div>
 			</div>
 			{{-- end toast --}}
 
 			<!-- Log In Modal -->
-			<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="loginmodal" aria-hidden="true">
-				<div class="modal-dialog modal-xl login-pop-form" role="document">
-					<div class="modal-content" id="loginmodal">
-						<div class="modal-headers">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							  <span class="ti-close"></span>
-							</button>
-						  </div>
-					
-						<div class="modal-body p-5">
-							<div class="text-center mb-4">
-								<h2 class="m-0 ft-regular">Đăng nhập</h2>
-							</div>
-							<form action="" method="post">				
-								<div class="form-group">
-									<label>Email</label>
-									<input type="email" name="email" class="form-control" placeholder="Email*">
-								</div>
-								<div class="form-group">
-									<label>Mật khẩu</label>
-									<input type="password" name="password" class="form-control" placeholder="Mật khẩu*">
-								</div>
-								{{-- <div class="form-group">
-									<div class="d-flex align-items-center justify-content-between">
-										<div class="flex-1">
-											<input id="dd" class="checkbox-custom" name="dd" type="checkbox">
-											<label for="dd" class="checkbox-custom-label">Remember Me</label>
-										</div>	
-										<div class="eltio_k2">
-											<a href="#">Lost Your Password?</a>
-										</div>	
-									</div>
-								</div> --}}
-								<div class="form-group">
-									<button type="submit" class="btn btn-md full-width bg-dark text-light fs-md ft-medium">Đăng nhập</button>
-								</div>
-								
-								<div class="form-group text-center mb-0">
-									<p class="extra">Chưa có tài khoản?<a href="#et-register-wrap" class="text-dark"> Đăng ký</a></p>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
+            @include('client.layouts._form-login')
 			<!-- End Modal -->
-			
+
 			<!-- Search -->
 			@include('client.layouts._search')
-			
+
 			<!-- Wishlist -->
 			<div class="w3-ch-sideBar w3-bar-block w3-card-2 w3-animate-right" style="display:none;right:0;" id="Wishlist">
 				<div class="rightMenu-scroll">
@@ -306,14 +262,14 @@
 								</div>
 								<div class="fls_last"><button class="close_slide gray"><i class="ti-close"></i></button></div>
 							</div>
-							
+
 						</div>
-						
+
 						<div class="d-flex align-items-center justify-content-between br-top br-bottom px-3 py-3">
 							<h6 class="mb-0">Tổng tiền</h6>
 							<h3 class="mb-0 ft-medium">$417</h3>
 						</div>
-						
+
 						<div class="cart_action px-3 py-3">
 							<div class="form-group">
 								<button type="button" class="btn d-block full-width btn-dark">Move To Cart</button>
@@ -322,16 +278,16 @@
 								<button type="button" class="btn d-block full-width btn-dark-light">Edit or View</button>
 							</div>
 						</div>
-						
+
 					</div>
 				</div>
 			</div>
-			
+
 			<!-- Cart -->
 			@include('client.layouts._cart')
-			
+
 			<a id="back2Top" class="top-scroll" title="Back to top" href="#"><i class="ti-arrow-up"></i></a>
-			
+
 		</div>
 		<!-- ============================================================== -->
 		<!-- End Wrapper -->

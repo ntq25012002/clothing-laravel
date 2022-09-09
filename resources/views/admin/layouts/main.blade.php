@@ -46,6 +46,7 @@
             <section class="content">
                 <div class="container-fluid">
                     <!-- Small boxes (Stat box) -->
+{{--                    {{dd(Auth::user()->roles[0]['id'])}}--}}
                     @yield('content')
                     <!-- /.row (main row) -->
 

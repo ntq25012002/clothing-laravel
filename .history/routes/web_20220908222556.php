@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
@@ -27,16 +28,8 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-//Route::get('dashboard', [CustomAuthController::class, 'dashboard']);
-Route::get('login', [CustomAuthController::class, 'index'])->name('login');
-Route::post('custom-login', [CustomAuthController::class, 'login'])->name('post-login');
-Route::get('registration', [CustomAuthController::class, 'registration'])->name('register-user');
-Route::post('custom-registration', [CustomAuthController::class, 'customRegistration'])->name('register.custom');
-Route::post('signout', [CustomAuthController::class, 'logout'])->name('logout');
-
 Route::get('/',[HomeController::class,'index'])->name('home');
-Route::post('/client-login',[LoginController::class,'clientLogin'])->name('client-login');
+// Route::post('/client-login',[LoginController::class,'clientLogin'])->name('client-login');
 Route::get('/404',function() {
     return view('client.404');
 })->name('404');
@@ -59,7 +52,7 @@ Route::prefix('home')->group(function() {
 
 // Route::get('admin/login',[AuthController::class,'index']);
 // Route::post('/home',[LoginController::class,'clientLogin'])->name('login');
-Route::middleware('auth')->name('admin.')->prefix('admin')->group(function () {
+Route::name('admin.')->prefix('admin')->group(function () {
     Route::get('/',[DashboardController::class,'index'])->name('dashboard');
     // User
     Route::prefix('user')->name('user.')->group(function () {
@@ -165,6 +158,12 @@ Route::group(['prefix' => 'laravel-filemanager', 'middleware'], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });
 
+// Route::get('dashboard', [CustomAuthController::class, 'dashboard']);
+// Route::get('login', [CustomAuthController::class, 'index'])->name('login');
+// Route::post('custom-login', [CustomAuthController::class, 'customLogin'])->name('login.custom');
+// Route::get('registration', [CustomAuthController::class, 'registration'])->name('register-user');
+// Route::post('custom-registration', [CustomAuthController::class, 'customRegistration'])->name('register.custom');
+// Route::get('signout', [CustomAuthController::class, 'signOut'])->name('signout');
 
 // Auth::routes();
 

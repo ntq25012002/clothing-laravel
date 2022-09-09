@@ -3,9 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Auth;
 
 class CheckLoginAdmin
 {
@@ -18,24 +17,26 @@ class CheckLoginAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (! Auth::check()) {
-            return redirect('login');
-        }else{
-            if(!$this->isLoginAmin()){
-                return redirect()->route('welcome');
-                // return redirect()->route('login')->with('msg_err','Bạn không có quyền truy cập !');
-            }
-            // if($this->isLoginAmin()){
-                return $next($request);
-            // }
-        }
+//        if(!Auth::check()) {
+//            return redirect('login')->with('msg_err','Bạn chưa đăng nhập !');
+//        }else{
+//            if(!$this->isLoginAdmin()) {
+//                return redirect('login')->with('msg_err','Bạn không có quyền truy cập !');
+//            }
+//        }
+
+        return $next($request);
+
     }
 
-    public function isLoginAmin() {
-        if (Gate::allows('is-admin')) {
+    public function isLoginAdmin() {
+        if(Auth::check()) {
+            foreach (Auth::user()->roles as $item) {
+                if($item->id == 2) {
+                    return false;
+                }
+            }
             return true;
         }
-        return false;
     }
-   
 }

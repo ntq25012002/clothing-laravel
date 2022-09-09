@@ -1,74 +1,64 @@
 <?php
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use Hash;
-use Session;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\session;
+use Illuminate\Support\Facades\Validator;
 class CustomAuthController extends Controller
 {
     public function index()
     {
-        return view('auth.login');
-    }  
-      
-    public function customLogin(Request $request)
-    {
-        $request->validate([
-            'email' => 'required',
-            'password' => 'required',
-        ]);
-   
-        $credentials = $request->only('email', 'password');
-        if (Auth::attempt($credentials)) {
-            return redirect()->intended('dashboard')
-                        ->withSuccess('Signed in');
-        }
-  
-        return redirect("login")->withSuccess('Login details are not valid');
+        return view('auth.login-2');
     }
 
-    public function registration()
-    {
-        return view('auth.registration');
-    }
-      
-    public function customRegistration(Request $request)
-    {  
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
-        ]);
-           
-        $data = $request->all();
-        $check = $this->create($data);
-         
-        return redirect("dashboard")->withSuccess('You have signed-in');
+    public function login(Request $request) {
+        // dd($request->all());
+        $rules = [
+            'email' => 'required | email',
+            'password' => 'required'
+        ];
+        $messages = [
+            'email.requied' => 'Bắt buộc nhập',
+            'email.email' => 'Chưa đúng định dạng email',
+            'password.required' => 'Bắt buộc nhập'
+        ];
+        // $request->validate($rules,$messages);
+        $validator = Validator::make($request->all(),$rules,$messages);
+        // dd($validator);
+        if($validator->fails()) {
+            return redirect('/login')->withErrors($validator)->withInput();
+        }else{
+            $email = $request->input('email');
+            $password = $request->input('password');
+            $credentials = [
+                'email' => $email ,
+                'password' => $password
+            ];
+            if(Auth::attempt($credentials)) {
+                // $request->session()->regenerate();
+                return redirect()->intended('/admin');
+            }else{
+                Session::flash('error','Email hoặc mật khẩu không đúng');
+                return redirect()->back();
+            }
+        }
+        // return redirect('admin');
+        // return redirect("login")->with('msg','Đăng nhập thất bại');
     }
 
-    public function create(array $data)
-    {
-      return User::create([
-        'name' => $data['name'],
-        'email' => $data['email'],
-        'password' => Hash::make($data['password'])
-      ]);
-    }    
-    
-    public function dashboard()
-    {
-        if(Auth::check()){
-            return view('dashboard');
-        }
-  
-        return redirect("login")->withSuccess('You are not allowed to access');
+    public function registerForm() {
+
     }
-    
-    public function signOut() {
-        Session::flush();
+
+    public function logout(Request $request) {
         Auth::logout();
-  
-        return Redirect('login');
+//        // Làm mất hiệu lực của session
+//        $request->session()->invalidate();
+//        // Reset Token
+//        $request->session()->regenerateToken();
+
+        return redirect('/login');
     }
 }

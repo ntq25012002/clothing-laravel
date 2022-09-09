@@ -120,12 +120,12 @@
               </li> --}}
              {{-- @endif --}}
             </ul>
-
+            
 
             <li class="nav-item">
               <a href="#" class="nav-link">
                 <i class="fa-duotone fas fa-tags nav-icon"></i>
-                <p>
+                <p> 
                   Khuyến mại
                   <i class="right fas fa-angle-left"></i>
                 </p>
@@ -150,8 +150,8 @@
             <li class="nav-item">
               <a href="#" class="nav-link">
               <i class="nav-icon fa-solid fa-image"></i>
-                <p>
-                  Slider
+                <p> 
+                  Slider 
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
@@ -175,8 +175,8 @@
               <a href="#" class="nav-link">
               <i class="nav-icon fas fa-clipboard-list"></i>
               {{-- <i class="nav-icon fas fa-duotone fa-gallery-thumbnails"></i> --}}
-                <p>
-                  Vai trò
+                <p> 
+                  Vai trò 
                   <i class="right fas fa-angle-left"></i>
                 </p>
 
@@ -230,7 +230,7 @@
 
           </li>
         </ul>
-
+        
       </nav>
       <!-- /.sidebar-menu -->
     </div>

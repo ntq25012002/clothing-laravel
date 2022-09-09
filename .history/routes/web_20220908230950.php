@@ -28,12 +28,12 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-//Route::get('dashboard', [CustomAuthController::class, 'dashboard']);
+Route::get('dashboard', [CustomAuthController::class, 'dashboard']);
 Route::get('login', [CustomAuthController::class, 'index'])->name('login');
-Route::post('custom-login', [CustomAuthController::class, 'login'])->name('post-login');
+Route::post('custom-login', [CustomAuthController::class, 'customLogin'])->name('post-login');
 Route::get('registration', [CustomAuthController::class, 'registration'])->name('register-user');
 Route::post('custom-registration', [CustomAuthController::class, 'customRegistration'])->name('register.custom');
-Route::post('signout', [CustomAuthController::class, 'logout'])->name('logout');
+Route::post('signout', [CustomAuthController::class, 'signOut'])->name('logout');
 
 Route::get('/',[HomeController::class,'index'])->name('home');
 Route::post('/client-login',[LoginController::class,'clientLogin'])->name('client-login');
@@ -59,7 +59,7 @@ Route::prefix('home')->group(function() {
 
 // Route::get('admin/login',[AuthController::class,'index']);
 // Route::post('/home',[LoginController::class,'clientLogin'])->name('login');
-Route::middleware('auth')->name('admin.')->prefix('admin')->group(function () {
+Route::middleware('auth.admin')->name('admin.')->prefix('admin')->group(function () {
     Route::get('/',[DashboardController::class,'index'])->name('dashboard');
     // User
     Route::prefix('user')->name('user.')->group(function () {

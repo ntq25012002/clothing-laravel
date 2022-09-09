@@ -28,12 +28,12 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-//Route::get('dashboard', [CustomAuthController::class, 'dashboard']);
+Route::get('dashboard', [CustomAuthController::class, 'dashboard']);
 Route::get('login', [CustomAuthController::class, 'index'])->name('login');
-Route::post('custom-login', [CustomAuthController::class, 'login'])->name('post-login');
+Route::post('custom-login', [CustomAuthController::class, 'customLogin'])->name('post-login');
 Route::get('registration', [CustomAuthController::class, 'registration'])->name('register-user');
 Route::post('custom-registration', [CustomAuthController::class, 'customRegistration'])->name('register.custom');
-Route::post('signout', [CustomAuthController::class, 'logout'])->name('logout');
+Route::get('signout', [CustomAuthController::class, 'signOut'])->name('logout');
 
 Route::get('/',[HomeController::class,'index'])->name('home');
 Route::post('/client-login',[LoginController::class,'clientLogin'])->name('client-login');
